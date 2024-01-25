@@ -2,6 +2,7 @@ import {Renderer} from './renderer.js';
 import {Circle} from './circle.js';
 
 const canv = document.getElementById("canvas");
+//ctx helps w/ drawing
 const ctx = canv.getContext("2d");
 
 const renderer = new Renderer(canv, ctx);
@@ -13,7 +14,7 @@ function updateAndDraw() {
     const circle = new Circle({x: 50, y: 60}, 10, 0);
     //draw objects
     renderer.clearFrame();
-    renderer.drawCircle(circle, "black");
+    renderer.drawCircle(circle, "black", "pink");
 
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
