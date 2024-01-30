@@ -14,7 +14,10 @@ function updateAndDraw() {
     const circle = new Circle({x: 50, y: 60}, 10, 0);
     //draw objects
     renderer.clearFrame();
-    renderer.drawCircle(circle, "black", "pink");
-
+    renderer.drawCircle(circle, "black");
+    //draw a rectangle
+    ctx.fillRect(80,40,80,20);
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(80,40,80,20);
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
