@@ -17,8 +17,8 @@ function updateAndDraw() {
     renderer.drawCircle(circle, "black");
 
     //draw a rectangle
-    ctx.fillRect(80,40,80,60);
+    ctx.fillRect(80,60,80,60);
     ctx.strokeStyle = "red";
-    ctx.strokeRect(80,40,80,60);
+    ctx.strokeRect(80,60,80,60);
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
