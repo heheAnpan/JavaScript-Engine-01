@@ -1,6 +1,7 @@
 import {Renderer} from './renderer.js';
 import {Circle} from './circle.js';
 import {Input} from './input.js';
+import {RigidBody} from './rigidBody.js';
 
 const SMALLEST_RADIUS = 10;
 const dt = 1/60;
@@ -25,7 +26,7 @@ function updateAndDraw() {
 
     //make objects
     if (inp.inputs.lclick && shapeBeingMade == null) {
-        shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+        shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS);
     }
     if (inp.inputs.lclick && shapeBeingMade) {
         const selectedRadius = shapeBeingMade.position.clone().subtract(inp.inputs.mouse.position).magnitude();
@@ -34,7 +35,7 @@ function updateAndDraw() {
 
     //add objects
     if (shapeBeingMade && !inp.inputs.lclick) {
-        objects.push(shapeBeingMade); //push means add to the array "objects"
+        addObject(shapeBeingMade);  //call the function
         shapeBeingMade = null;
     }
 
@@ -48,3 +49,8 @@ function updateAndDraw() {
 
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
+
+function addObject(shape) {
+    const object = new RigidBody(shape);  
+    objects.push(object);   //push - store object in array
+} 
