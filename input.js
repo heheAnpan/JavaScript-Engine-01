@@ -66,6 +66,11 @@ export class Input {
         }.bind(this), 100);
     }
 
+    movedObject(e)
+    {
+        
+    }
+
     resizeCanvas() {
         this.canv.width = this.window.innerWidth;
         this.canv.height = this.window.innerHeight;

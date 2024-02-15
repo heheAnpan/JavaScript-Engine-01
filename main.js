@@ -75,6 +75,20 @@ function updateAndDraw() {
         moveObjectWithMouse(inp.inputs.mouse.movedObject);
     }
 
+    // check the distance between the position of the mouse and all objects using a for loop and vector distance method
+    if(inp.inputs.rclick)
+    {
+        let distance;
+        for(let i=0; i<objects.length; i++) 
+        {
+            distance = objects[i].shape.position.distanceTo(vector);
+            if (distance < lowestDistance) {
+                lowestDistance = distance;
+                closestObject = objects[i];
+            }
+        }
+    }
+
     //Lesson 03 - update object positions with velocity
     for(let i=0; i<objects.length; i++) {
         objects[i].updateShape(dt);
@@ -87,7 +101,6 @@ function updateAndDraw() {
     if (shapeBeingMade) {
         shapeBeingMade.draw(ctx, bordCol, null);
     }
-
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
 
