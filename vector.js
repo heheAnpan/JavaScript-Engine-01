@@ -1,30 +1,28 @@
-export class Vec {      //export allows us to import it in other files
-    //class means this is a template, used for making objects
-	constructor(x, y) {   //call the constructor with the keyword new, and create an object
-		this.x = x; //create attribute this.x and give it value x from the input
+export class Vec {
+	constructor(x, y) {
+		this.x = x;
 		this.y = y;
 	}
-
     //chainable methods
 	copy (v) {	//copy the xy of another vector into this
 		this.x = v.x;
 		this.y = v.y;
 		return this;
 	}
-    
-    add (v) {		//add a vector to this
-		this.x += v.x;  //+= means add and store, this.x = this.x + v.x;
-		this.y += v.y;  //+= is an "operator"
-		return this;    //finish the function and return a value
+	
+	add (v) {		//add a vector to this
+		this.x += v.x;
+		this.y += v.y;
+		return this;
 	}
-
-    subtract (v) {
-        this.x -= v.x;
-        this.y -= v.y;
-        return this;
-    }
-
-    multiply (s) {
+	
+	subtract (v) {
+		this.x -= v.x;
+		this.y -= v.y;
+		return this;
+	}
+	
+	multiply (s) {
 		this.x *= s;
 		this.y *= s;
 		return this;
@@ -33,6 +31,12 @@ export class Vec {      //export allows us to import it in other files
 	divide (s) {
 		this.x /= s;
 		this.y /= s;
+		return this;
+	}
+
+	absolute() {
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
 		return this;
 	}
 	
@@ -44,4 +48,8 @@ export class Vec {      //export allows us to import it in other files
     magnitude () {
 		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
-}	
+
+	distanceTo (v) {
+		return this.clone().subtract(v).magnitude();
+	}
+}
