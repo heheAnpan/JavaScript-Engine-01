@@ -15,6 +15,8 @@ export class Input {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.mouseMove = this.mouseMove.bind(this);
         this.resizeCanvas = this.resizeCanvas.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onKeyUp = this.onKeyUp.bind(this);
     }
 
     addListeners() {
@@ -23,6 +25,8 @@ export class Input {
         this.canv.addEventListener('contextmenu', this.onContextMenu);
         this.canv.addEventListener('mousemove', this.mouseMove);
         this.window.addEventListener('resize', this.resizeCanvas, false);
+        this.window.addEventListener('keydown', this.onKeyDown);
+        this.window.addEventListener('keyup', this.onKeyUp);
     }
 
     mouseDown(e) {
@@ -69,5 +73,20 @@ export class Input {
     resizeCanvas() {
         this.canv.width = this.window.innerWidth;
         this.canv.height = this.window.innerHeight;
+    }
+
+    //use the keyboard (keycode 81 means Q key) instead of right click of mouse
+    onKeyUp(e) {
+        switch (e.keyCode) {
+            case 81: this.inputs.rclick = false; break;
+            //you can add other cases with other keycodes
+        }
+    }
+
+    onKeyDown(e) {
+        console.log(true);
+        switch (e.keyCode) {
+            case 81: this.inputs.rclick = true; break;
+        }
     }
 }
