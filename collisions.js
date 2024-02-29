@@ -16,13 +16,13 @@ export class Collisions {
     //need an input since we're checking circles
     //logic part
     narrowPhaseDetection(objects) {
-        for (let i=0; i<objects.length(); i++) {
-            for (let j=0; j<objects.length(); j++) {
+        for (let i=0; i<objects.length; i++) {
+            for (let j=0; j<objects.length; j++) {
                 if(j>i){
                     //detect collisions
                     //circle collisions
-                    if(objects[i].shape instanceof Circle && objects[j] instanceof Circle) {
-                        this.detectCollisionCircleCircle(objects[i],objects[j])
+                    if(objects[i].shape instanceof Circle && objects[j].shape instanceof Circle) {
+                        this.detectCollisionCircleCircle(objects[i],objects[j]);
                         }
                     }
                     //rectangle collisions
@@ -31,8 +31,25 @@ export class Collisions {
         }
     }
 
-    //math part
+    //math part; detect if there's an overlap
+    //o1 and o2 are rigidbodies
+    //if there's an overlap, push them apart
+    //distance when the circles are barely touching - r1 + r2, less than r1+r2 - touching
     detectCollisionCircleCircle(o1, o2) {
-
+        const s1 = o1.shape;
+        const s2 = o2.shape;
+        const dist = s1.position.distanceTo(s2.position);
+        if (dist < s1.radius + s2.radius) { //the circles collide
+            const overlap = s1.radius + s2.radius - dist;
+            // just calculate w/o changing the position
+            // clone() - position remains unchanged
+            // normal is a unit vector (only info it stores is direction)
+            const normal = s2.position.clone().subtract(s1.position);
+            this.collisions.push({
+                collidedPair: [o1,o2], 
+                overlap: overlap,
+                normal: normal
+            });
+        }
     }
 }
