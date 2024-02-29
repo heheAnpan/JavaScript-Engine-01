@@ -48,8 +48,22 @@ export class Collisions {
             this.collisions.push({
                 collidedPair: [o1,o2], 
                 overlap: overlap,
-                normal: normal
+                normal: normal //unit vector from s1 to s2
             });
         }
+    }
+
+
+    pushOffObjects(o1,o2,overlap,normal)
+    {
+        //move each obj in normal direction by 0.5 of the overlap
+        o1.shape.position.subtract(normal.clone().multiply(overlap/2));
+        o2.shape.position.add(normal.clone().multiply(overlap/2));
+    }
+
+    // push them aparth? bounce them?
+    resolveCollisions()
+    {
+
     }
 }
