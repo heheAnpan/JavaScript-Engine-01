@@ -64,6 +64,12 @@ export class Collisions {
     // push them aparth? bounce them?
     resolveCollisions()
     {
-
+        let CollidedPair, overlap, normal, o1, o2;
+        for (let i=0; i<this.collisions.length;i++)
+        {
+            ({collidedPair, overlap, normal} = this.collisions[i]);
+            [o1, o2] = collidedcPair;
+            this.pushOffObjects(o1,o2,overlap,normal);
+        }
     }
 }
