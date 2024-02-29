@@ -9,6 +9,7 @@ const SMALLEST_RADIUS = 10;
 const dt = 1/60;    //time per frame
 
 const canv = document.getElementById("canvas");
+//contains function that can draw
 const ctx = canv.getContext("2d");
 
 const renderer = new Renderer(canv, ctx);
