@@ -1,8 +1,8 @@
-export class Collisions {
-    //parameter: variable in a method definition; what goes inside ()
+import {Circle} from './circle.js';
 
-	constructor() {
-        //this: keyword that refers to the current instance (a single occurrence of an object) of the class
+export class Collisions {
+	constructor() 
+    {
 		//class collision will detect all objects and if they detect collision, they will add it to the list
         this.collisions = [];
 	}
@@ -14,16 +14,19 @@ export class Collisions {
 
     //check only objects that are close enough that may be colliding
     //need an input since we're checking circles
-    //logic part
-    narrowPhaseDetection(objects) {
-        for (let i=0; i<objects.length; i++) {
-            for (let j=0; j<objects.length; j++) {
-                if(j>i){
+    narrowPhazeDetection(objects) 
+    {
+        for (let i=0; i<objects.length; i++) 
+        {
+            for (let j=0; j<objects.length; j++) 
+            {
+                if(j>i)
+                {
                     //detect collisions
                     //circle collisions
-                    if(objects[i].shape instanceof Circle && objects[j].shape instanceof Circle) {
+                    if(objects[i].shape instanceof Circle && objects[j].shape instanceof Circle) 
+                    {
                         this.detectCollisionCircleCircle(objects[i],objects[j]);
-                        }
                     }
                     //rectangle collisions
                 }
@@ -64,11 +67,11 @@ export class Collisions {
     // push them aparth? bounce them?
     resolveCollisions()
     {
-        let CollidedPair, overlap, normal, o1, o2;
+        let collidedPair, overlap, normal, o1, o2;
         for (let i=0; i<this.collisions.length;i++)
         {
             ({collidedPair, overlap, normal} = this.collisions[i]);
-            [o1, o2] = collidedcPair;
+            [o1, o2] = collidedPair;
             this.pushOffObjects(o1,o2,overlap,normal);
         }
     }
