@@ -46,6 +46,7 @@ export class Vec {
 			this.x /= length;
 			this.y /= length;
 		}
+		return this; //to make the method chainable you have to return this
 	}
 	
 	//non-chainable

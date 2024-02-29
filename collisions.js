@@ -46,8 +46,14 @@ export class Collisions {
             const overlap = s1.radius + s2.radius - dist;
             // just calculate w/o changing the position
             // clone() - position remains unchanged
+            
             // normal is a unit vector (only info it stores is direction)
-            const normal = s2.position.clone().subtract(s1.position);
+            const normal = s2.position.clone().subtract(s1.position).normalize();
+            //to normalize the vector means to make it a "unit" vector, i.e a vector with length = 1. 
+            //This is used when you just need the direction, and want to later multiply the direction times a scalar
+
+            console.log(normal);  //this helps you find the origin of the bug - normal was undefined because normalize() did not return a vector  
+            
             this.collisions.push({
                 collidedPair: [o1,o2], 
                 overlap: overlap,
@@ -60,7 +66,7 @@ export class Collisions {
     pushOffObjects(o1,o2,overlap,normal)
     {
         //move each obj in normal direction by 0.5 of the overlap
-        o1.shape.position.subtract(normal.clone().multiply(overlap/2));
+        o1.shape.position.subtract(normal.clone().multiply(overlap/2)); //now you are multiplying the normalized vector times a scalar(equal to half the overlap)
         o2.shape.position.add(normal.clone().multiply(overlap/2));
     }
 
